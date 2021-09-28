@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom'
 import './Topsongs.scss'
 import getTopSongApi from '../../api/topSongsApi'
 
-const TopSongs = () => {
+const TopSongs = (props) => {
+    const { setLoader } = props
     const [songsData, setSongsData] = useState()
     useEffect(() => {
         const getData = async () => {
@@ -12,6 +13,7 @@ const TopSongs = () => {
                 const response = await getTopSongApi.getAll()
                 console.log(response)
                 setSongsData(response)
+                setLoader()
             } catch (error) {
                 console.log("Failed to get data, error: ", error)
             }

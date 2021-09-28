@@ -6,11 +6,9 @@ import './Home.scss'
 const Home = () => {
     document.title = 'SMusic'
     const [loader, setLoader] = useState(true)
-    useEffect(() => {
-        setTimeout(() => {
-            setLoader(!loader)
-        }, 1500)
-    }, [])
+    const removeLoader = () => {
+        setLoader(false)
+    }
 
     return (
         <div className="home">
@@ -21,7 +19,7 @@ const Home = () => {
                     <p className="dsc">Where you can listen to music Free</p>
                     <p className='lorem'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, fugiat consequatur dolore sequi eos laborum quod voluptas voluptates molestiae aspernatur! Minus, sit expedita! Debitis expedita sequi est consequatur nulla error!</p>
                 </div>
-                <TopSongs />
+                <TopSongs setLoader={removeLoader} />
             </div>
             {
                 loader === true &&
