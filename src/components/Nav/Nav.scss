@@ -1,0 +1,82 @@
+@import url("https://fonts.googleapis.com/css2?family=Courgette&display=swap");
+.nav {
+  top: 0;
+  left: 0;
+  position: sticky;
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  height: 100vh;
+  width: 20%;
+  background: linear-gradient(125deg, #0073ff8e, #d414d4cb);
+  background-size: 500%;
+  justify-content: center;
+  border-radius: 0 10px 10px 0;
+  animation: animate 10s infinite ease-in-out;
+  &__link {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+
+    .link {
+      position: relative;
+      padding: 15px 20px 15px 10px;
+      cursor: pointer;
+      margin: 5px 0;
+      transition: 0.3s;
+      border-radius: 5px;
+      &.active {
+        background: rgba(128, 0, 128, 0.534);
+      }
+      &:hover {
+        background: rgba(128, 0, 128, 0.534);
+      }
+      svg {
+        font-size: 20px;
+        margin-right: 10px;
+      }
+      a {
+        font-size: 18px;
+        color: white;
+      }
+    }
+    .sub-nav {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow: hidden;
+      transition: 0.5s;
+      cursor: pointer;
+      height: 0;
+      transition: 0.5s;
+      overflow: hidden;
+      &.active {
+        height: 150px;
+      }
+      a {
+        position: relative;
+        background: rgba(0, 0, 0, 0.1);
+        padding: 10px 15px;
+        color: whitesmoke;
+        border-radius: 2px;
+        margin: 3px 0;
+        &:hover {
+          background: rgba(128, 0, 128, 0.534);
+        }
+      }
+    }
+  }
+}
+@keyframes animate {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

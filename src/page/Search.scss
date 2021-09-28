@@ -1,0 +1,111 @@
+.search-page {
+  position: relative;
+  width: 90%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+
+  .container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 50px;
+    .box {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 0 10px 1px rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      gap: 50px 0;
+
+      h2 {
+        font-size: 35px;
+        color: #1a0080;
+        position: relative;
+        &::after {
+          content: "";
+          position: absolute;
+          width: 10%;
+          height: 5px;
+          border-radius: 10px;
+          background: #b01ba5;
+          bottom: -10px;
+          left: 0;
+        }
+        span {
+          color: hotpink;
+        }
+      }
+
+      .list-result {
+        display: flex;
+        flex-direction: column;
+        gap: 20px 0;
+        width: 100%;
+        position: relative;
+
+        .song {
+          display: flex;
+          gap: 0 15px;
+          cursor: pointer;
+          border-radius: 10px;
+          width: 100%;
+          padding: 5px;
+
+          &:hover {
+            background: rgba(222, 171, 255, 0.1);
+          }
+          .img {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            border-radius: 5px;
+            overflow: hidden;
+
+            img {
+              position: absolute;
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+            }
+          }
+          .detail {
+            display: flex;
+            flex-direction: column;
+            gap: 10px 0;
+
+            .name {
+              font-size: 25px;
+              font-weight: 700;
+              color: #1a0080;
+            }
+            .singer {
+              font-size: 16px;
+              color: gray;
+            }
+          }
+        }
+      }
+
+      .not-found {
+        width: 100%;
+        height: 700px;
+        position: relative;
+        overflow: hidden;
+        img {
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+}

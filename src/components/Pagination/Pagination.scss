@@ -1,0 +1,23 @@
+.pagination {
+  display: flex;
+  gap: 0 10px;
+  align-items: center;
+
+  .btn-pagination {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background: white;
+    border: 1px solid hotpink;
+    border-radius: 5px;
+    font-size: 16px;
+    color: hotpink;
+    &.active {
+      background: hotpink;
+      color: white;
+    }
+  }
+}

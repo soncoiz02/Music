@@ -1,0 +1,26 @@
+.control {
+  display: flex;
+  gap: 0 20px;
+  align-items: center;
+  margin: 0 auto;
+  justify-content: space-between;
+  width: 100%;
+
+  .timer {
+    font-size: 18px;
+    color: hotpink;
+    font-weight: bold;
+  }
+  .btn-play {
+    width: 60px;
+    height: 60px;
+    font-size: 30px;
+    background: pink;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color: hotpink;
+    cursor: pointer;
+  }
+}

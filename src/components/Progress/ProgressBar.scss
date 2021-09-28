@@ -1,0 +1,68 @@
+.progress-bar-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 10px;
+
+  &::before {
+    content: "";
+    background-color: rgba(0, 0, 0, 0.1);
+    width: 99%;
+    height: calc(5px - 1px);
+    display: block;
+    position: absolute;
+    border-radius: 10px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .progress-bar-cover {
+    background: linear-gradient(to right, white, hotpink);
+    width: 0%;
+    height: 5px;
+    display: block;
+    position: absolute;
+    border-radius: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  .range {
+    -webkit-appearance: none;
+    background-color: rgba(240, 9, 9, 0.397);
+    height: 10px;
+    width: 100%;
+    cursor: pointer;
+    opacity: 0;
+    margin: 0 auto;
+
+    &::-webkit-slider-thumb {
+      width: 20px;
+      height: 20px;
+
+      background: #350f2d;
+      border: 1px solid #000000;
+      border-radius: 50%;
+      cursor: pointer;
+      -webkit-appearance: none;
+    }
+  }
+
+  .thumb {
+    width: 20px;
+    height: 20px;
+    box-shadow: 0px 0px 5px rgba(233, 54, 173, 0.753);
+    z-index: 3;
+    background: rgb(255, 255, 255);
+    position: absolute;
+    border-radius: 50%;
+    top: 50%;
+    transform: translate(0%, -50%);
+    pointer-events: none; /* Remove pointer events on thumb so user can click on the actual thumb beaneath it!  */
+    user-select: none; /*  Prevent Accidentally highlighting the number while sliding the cursor  */
+  }
+}

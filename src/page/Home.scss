@@ -1,0 +1,57 @@
+.home {
+  position: relative;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+
+  .container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 50px;
+  }
+
+  .intro {
+    display: flex;
+    flex-direction: column;
+
+    h1 {
+      font-size: 70px;
+      font-weight: bold;
+      color: #2e2e7c;
+      margin-bottom: 10px;
+      letter-spacing: 3px;
+      span {
+        color: #8c2ab4bd;
+        font-family: sans-serif;
+      }
+    }
+    .dsc {
+      font-size: 30px;
+      margin-left: 20px;
+      color: #8c2ab4bd;
+      margin-bottom: 30px;
+    }
+    .lorem {
+      font-size: 18px;
+      margin-left: 20px;
+      color: whitesmoke;
+    }
+  }
+
+  .top-songs {
+    width: 100%;
+    position: relative;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 60px 0;
+    margin-top: 100px;
+  }
+}
