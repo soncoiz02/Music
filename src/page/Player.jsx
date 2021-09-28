@@ -10,7 +10,7 @@ import './Player.scss'
 
 const Player = () => {
     const location = useLocation()
-    const [songData, setSongData] = useState()
+    const [songData, setSongData] = useState([])
     const [loader, setLoader] = useState(true)
 
     const param = location.search
