@@ -1,6 +1,5 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router'
-import { useEffect, useState } from 'react/cjs/react.development'
 import getDetailSong from '../api/detailApi'
 import Loader from '../components/Loader/Loader'
 import SearchForm from '../components/SearchForm/SearchForm'
