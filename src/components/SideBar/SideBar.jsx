@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Link, NavLink } from 'react-router-dom'
-import './Nav.scss'
+import './SideBar.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpotify } from '@fortawesome/free-brands-svg-icons'
 import { faHome, faMusic, faPodcast, faHeadphones } from '@fortawesome/free-solid-svg-icons'
@@ -16,15 +16,15 @@ const navData = [
         icon: <FontAwesomeIcon icon={faMusic} />,
         subNav: [
             {
-                path: "/list-music?vn-pop",
+                path: "/list-songs?vn-pop",
                 text: "Pop Music",
             },
             {
-                path: "/list-music?vn-rap",
+                path: "/list-songs?vn-rap",
                 text: "Rap Music",
             },
             {
-                path: "/list-music?vn-remix",
+                path: "/list-songs?vn-edm",
                 text: "Remix",
             }
         ]
@@ -34,41 +34,46 @@ const navData = [
         icon: <FontAwesomeIcon icon={faPodcast} />,
         subNav: [
             {
-                path: "/list-music?us-pop",
+                path: "/list-songs?us-pop",
                 text: "Pop Music",
             },
             {
-                path: "/list-music?us-edm",
+                path: "/list-songs?us-edm",
                 text: "EDM",
             },
             {
-                path: "/list-music?us-rap",
+                path: "/list-songs?us-rap",
                 text: "Rap Music",
             }
         ]
     },
     {
-        path: "/list-music?korea",
-        text: "Korean Music",
-        icon: <FontAwesomeIcon icon={faSpotify} />
-    },
-    {
-        path: "/list-music?china",
-        text: "Chinese Music",
-        icon: <FontAwesomeIcon icon={faHeadphones} />
+        text: "Asian Music",
+        icon: <FontAwesomeIcon icon={faSpotify} />,
+        subNav: [
+            {
+                path: "/list-songs?korea",
+                text: "Korean Music",
+            },
+            {
+                path: "/list-songs?china",
+                text: "Chinese Music",
+            }
+        ]
     }
 ]
 
 const SubNav = props => {
-    const { subNavData } = props
+    const { subNavData, onclick } = props
     return (
-        <Link to={subNavData.path}>
+        <Link to={subNavData.path} onClick={onclick}>
             {subNavData.text}
         </Link>
     )
 }
 
-const Nav = () => {
+const SideBar = (props) => {
+    const { setLoader } = props
     useEffect(() => {
         activeLink()
     }, [])
@@ -90,8 +95,6 @@ const Nav = () => {
                 links[i].classList.add('active')
                 subNav[i].classList.add('active')
                 subNav[0].classList.remove('active')
-                subNav[3].classList.remove('active')
-                subNav[4].classList.remove('active')
             }
         }
     }
@@ -100,7 +103,7 @@ const Nav = () => {
             <ul className="nav__link">
                 {navData.map((data, index) => (
                     <>
-                        <li className={'link'}>
+                        <li className='link'>
                             {
                                 data.path ?
                                     <NavLink to={data.path}>{data.icon} {data.text}</NavLink>
@@ -108,7 +111,7 @@ const Nav = () => {
                             }
                         </li>
                         <div className="sub-nav">
-                            {data?.subNav?.map((data, index) => (<SubNav subNavData={data} key={index} />))}
+                            {data?.subNav?.map((data, index) => (<SubNav subNavData={data} key={index} onclick={setLoader} />))}
                         </div>
                     </>
                 ))}
@@ -117,4 +120,4 @@ const Nav = () => {
     )
 }
 
-export default Nav
+export default SideBar

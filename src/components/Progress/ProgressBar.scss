@@ -1,7 +1,17 @@
+.progress-bar {
+  display: flex;
+  gap: 0 30px;
+  width: 700px;
+
+  .timer {
+    font-size: 14px;
+    color: #ac1bac;
+    font-weight: 700;
+  }
+}
 .progress-bar-container {
   position: relative;
-  width: 100%;
-  margin-bottom: 10px;
+  width: 550px;
 
   &::before {
     content: "";
@@ -18,7 +28,7 @@
   }
 
   .progress-bar-cover {
-    background: linear-gradient(to right, white, hotpink);
+    background: linear-gradient(to right, white, #ac1bac);
     width: 0%;
     height: 5px;
     display: block;
@@ -55,7 +65,7 @@
   .thumb {
     width: 20px;
     height: 20px;
-    box-shadow: 0px 0px 5px rgba(233, 54, 173, 0.753);
+    box-shadow: 0px 0px 5px #ac1bac;
     z-index: 3;
     background: rgb(255, 255, 255);
     position: absolute;

@@ -4,23 +4,40 @@
   align-items: center;
   margin: 0 auto;
   justify-content: space-between;
-  width: 100%;
+  width: 200px;
 
-  .timer {
-    font-size: 18px;
-    color: hotpink;
-    font-weight: bold;
-  }
   .btn-play {
-    width: 60px;
-    height: 60px;
-    font-size: 30px;
-    background: pink;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #ac1bac;
+    font-size: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    color: hotpink;
+    color: #ac1bac;
     cursor: pointer;
+    transition: 0.3s;
+    &:hover {
+      background: #ac1bac;
+      color: white;
+    }
+  }
+  .btn-prev,
+  .btn-next {
+    cursor: pointer;
+    color: #ac1bac;
+    font-size: 20px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+    &:hover {
+      background: #ac1bac34;
+    }
   }
 }

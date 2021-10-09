@@ -38,20 +38,11 @@
     .lorem {
       font-size: 18px;
       margin-left: 20px;
-      color: whitesmoke;
+      color: gray;
     }
   }
 
   .top-songs {
     width: 100%;
-    position: relative;
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.1);
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    gap: 60px 0;
-    margin-top: 100px;
   }
 }

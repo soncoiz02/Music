@@ -1,10 +1,11 @@
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faSearch, faMoon, faSun } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useState } from 'react'
 import './SearchForm.scss'
 const SearchForm = () => {
     const [searchValue, setSearchValue] = useState('')
     const [disable, setDisable] = useState(true)
+    const [darkMode, setDarkMode] = useState(false)
     const setValue = (e) => {
         const value = e.target.value
         setSearchValue(value)
@@ -17,12 +18,25 @@ const SearchForm = () => {
         window.location.assign(`/search?q=${searchValue}`)
     }
 
+    const handleDarkMode = () => {
+        setDarkMode(!darkMode)
+        const container = document.querySelector('.container')
+        if (darkMode === false) {
+            container.classList.add('dark')
+        }
+        else {
+            container.classList.remove('dark')
+        }
+    }
     return (
         <div className="search-form">
+            <div className="btn-bar">
+                <FontAwesomeIcon icon={faBars} />
+            </div>
             <form className="form" onSubmit={getQueryValue}>
                 <input
                     type="text"
-                    placeholder="Search a song..."
+                    placeholder="Tìm tên bài hát hoặc ca sĩ..."
                     value={searchValue}
                     onChange={setValue}
                 />
@@ -35,6 +49,10 @@ const SearchForm = () => {
                     <FontAwesomeIcon icon={faSearch} />
                 </button>
             </form>
+            <div className={darkMode === true ? "btn-dark-mode active" : "btn-dark-mode"} onClick={handleDarkMode}>
+                <div className="button"></div>
+                <FontAwesomeIcon icon={darkMode === true ? faSun : faMoon} />
+            </div>
         </div>
     )
 }

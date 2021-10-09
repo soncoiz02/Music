@@ -21,9 +21,13 @@ li {
 .container {
   display: flex;
 }
-
+.main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+}
 body {
-  background: linear-gradient(-160deg, #5ac8ffc4, #ff59ecb8);
   font-family: "Nunito Sans", sans-serif;
 }
 

@@ -8,11 +8,11 @@
   padding: 30px;
   height: 100vh;
   width: 20%;
-  background: linear-gradient(125deg, #0073ff8e, #d414d4cb);
-  background-size: 500%;
+  background: whitesmoke;
   justify-content: center;
-  border-radius: 0 10px 10px 0;
   animation: animate 10s infinite ease-in-out;
+  flex-shrink: 0;
+  z-index: 101;
   &__link {
     display: flex;
     justify-content: center;
@@ -28,24 +28,32 @@
       transition: 0.3s;
       border-radius: 5px;
       &.active {
-        background: rgba(128, 0, 128, 0.534);
+        background: rgb(172, 27, 172);
+        &:hover {
+          background: rgb(172, 27, 172);
+        }
+        a {
+          color: white;
+        }
       }
       &:hover {
-        background: rgba(128, 0, 128, 0.534);
+        background: rgba(0, 0, 0, 0.1);
       }
       svg {
         font-size: 20px;
         margin-right: 10px;
       }
       a {
+        width: 100%;
         font-size: 18px;
-        color: white;
+        color: rgb(172, 27, 172);
+        transition: 0.3s;
       }
     }
     .sub-nav {
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
       overflow: hidden;
       transition: 0.5s;
       cursor: pointer;
@@ -59,11 +67,11 @@
         position: relative;
         background: rgba(0, 0, 0, 0.1);
         padding: 10px 15px;
-        color: whitesmoke;
-        border-radius: 2px;
+        color: rgb(172, 27, 172);
+        border-radius: 5px;
         margin: 3px 0;
         &:hover {
-          background: rgba(128, 0, 128, 0.534);
+          background: rgba(128, 0, 128, 0.308);
         }
       }
     }

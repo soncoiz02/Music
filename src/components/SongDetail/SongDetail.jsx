@@ -3,17 +3,29 @@ import PropTypes from 'prop-types'
 import './SongDetail.scss'
 import ProgressBar from '../Progress/ProgressBar'
 import Control from '../Control/Control'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMusic } from '@fortawesome/free-solid-svg-icons'
 
 
 const SongDetail = props => {
-    const { audio, img, name, singer } = props
+    const { songsData, currentIndex, getNextIndex, getPrevIndex } = props
     const [percent, setPercent] = useState(0)
-    const [isPlay, setIsPlay] = useState(false)
+    const [isPlay, setIsPlay] = useState(true)
     const [duration, setDuration] = useState(0)
     const [currentTime, setCurrentTime] = useState(0)
     const [progressValue, setProgressValue] = useState(0)
+    const [rotateImg, setRotateImg] = useState()
     const audioRef = useRef()
-
+    useEffect(() => {
+        const rotateImg = document.querySelector('.song-detail-img').animate(
+            [{ transform: 'rotate(360deg)' }],
+            {
+                duration: 10000,
+                iterations: Infinity
+            }
+        )
+        setRotateImg(rotateImg)
+    }, [currentIndex])
     const getPercent = (e) => {
         const seekTime = audioRef.current.duration / 100 * e.target.value
         audioRef.current.currentTime = seekTime
@@ -22,23 +34,21 @@ const SongDetail = props => {
 
     const handlePlay = () => {
         const songAudio = audioRef.current
-        const rotateImg = document.querySelector('.img').animate(
-            [{ transform: 'rotate(360deg)' }],
-            {
-                duration: duration * 1000,
-                interation: Infinity
-            }
-        )
         if (isPlay === true) {
             songAudio.pause()
             setIsPlay(!isPlay)
-            rotateImg.pause()
         }
         else {
             songAudio.play()
             setIsPlay(!isPlay)
-            rotateImg.play()
         }
+    }
+
+    const playAnimation = () => {
+        rotateImg.play()
+    }
+    const pauseAnumation = () => {
+        rotateImg.pause()
     }
 
     const getCurrentTime = (e) => {
@@ -47,7 +57,7 @@ const SongDetail = props => {
         setPercent(percent)
         setProgressValue(percent)
         setCurrentTime(time.toFixed(2))
-        if (time === e.currentTarget.duration) setIsPlay(!isPlay)
+        if (time >= e.currentTarget.duration) getNextIndex()
     }
 
     const loadedData = (e) => {
@@ -57,33 +67,50 @@ const SongDetail = props => {
 
     return (
         <div className='song-detail'>
-            <div className="img">
-                <img src={img} alt='' />
-            </div>
-            <div className="detail">
-                <div className="name">{name}</div>
-                <div className="singer">{singer}</div>
-                <audio
-                    src={audio}
-                    className="audio"
-                    ref={audioRef}
-                    onLoadedData={loadedData}
-                    onTimeUpdate={getCurrentTime}
-                ></audio>
-                <div className="control-panel">
-                    <ProgressBar
-                        onChange={getPercent}
-                        percent={percent}
-                        value={progressValue}
-                    />
-                    <Control
-                        handlePlay={handlePlay}
-                        duration={duration}
-                        currentTime={currentTime}
-                        isPlay={isPlay}
-                    />
-                </div>
-            </div>
+            {
+                songsData &&
+                <>
+                    <div className="detail">
+                        <div className="name">{songsData[currentIndex].name}</div>
+                        <div className="singer">{songsData[currentIndex].singer}</div>
+                    </div>
+                    <div className="control-bar ">
+                        <audio
+                            src={songsData[currentIndex].audio}
+                            className="audio"
+                            ref={audioRef}
+                            onLoadedData={loadedData}
+                            onTimeUpdate={getCurrentTime}
+                            autoPlay
+                            onPlay={playAnimation}
+                            onPause={pauseAnumation}
+                        ></audio>
+                        <Control
+                            handlePlay={handlePlay}
+                            duration={duration}
+                            currentTime={currentTime}
+                            isPlay={isPlay}
+                            getNextIndex={getNextIndex}
+                            getPrevIndex={getPrevIndex}
+                        />
+                        <ProgressBar
+                            onChange={getPercent}
+                            percent={percent}
+                            value={progressValue}
+                            duration={duration}
+                            currentTime={currentTime}
+                        />
+                    </div>
+                    <div className="song-detail-img">
+                        <img src={songsData[currentIndex].avatar} alt='' />
+                    </div>
+                    <div className="note-animation">
+                        <FontAwesomeIcon icon={faMusic} className="note" />
+                        <FontAwesomeIcon icon={faMusic} className="note" />
+                        <FontAwesomeIcon icon={faMusic} className="note" />
+                    </div>
+                </>
+            }
         </div>
     )
 }

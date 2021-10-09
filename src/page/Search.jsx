@@ -29,7 +29,6 @@ const Search = () => {
 
     return (
         <div className="search-page">
-            <SearchForm />
             <div className="container">
                 {
                     searchResult.length > 0 ?

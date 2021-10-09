@@ -11,12 +11,12 @@
     align-items: center;
     cursor: pointer;
     background: white;
-    border: 1px solid hotpink;
+    border: 1px solid #ac1bac;
     border-radius: 5px;
     font-size: 16px;
-    color: hotpink;
+    color: #ac1bac;
     &.active {
-      background: hotpink;
+      background: #ac1bac8c;
       color: white;
     }
   }

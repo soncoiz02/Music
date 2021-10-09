@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import SearchForm from '../components/SearchForm/SearchForm'
 import './Songs.scss'
 import getTypeSongs from '../api/typeSongsApi'
 import { useLocation } from 'react-router'
@@ -7,12 +6,63 @@ import queryString from 'query-string'
 import ListSongs from '../components/ListSongs/ListSongs'
 import Pagination from '../components/Pagination/Pagination'
 import Loader from '../components/Loader/Loader'
+import vnRap from '../assets/img/rap-vn.jpg'
+import vnPop from '../assets/img/pop-vn.jpg'
+import vnEdm from '../assets/img/edm-vn.jpg'
+import usPop from '../assets/img/pop-us.jpg'
+import usRap from '../assets/img/rap-us.jpg'
+import usEdm from '../assets/img/edm-us.jpg'
+import korea from '../assets/img/korea.jpg'
+import china from '../assets/img/china.jpg'
 
-const Songs = () => {
+const data = [
+    {
+        id: 'vn-pop',
+        img: vnPop,
+        title: 'Top 100 V-POP'
+    },
+    {
+        id: 'vn-rap',
+        img: vnRap,
+        title: 'Top 100 Rap Việt'
+    },
+    {
+        id: 'vn-edm',
+        img: vnEdm,
+        title: 'Top 100 EDM Việt'
+    },
+    {
+        id: 'us-pop',
+        img: usPop,
+        title: 'Top 100 US/UK-POP'
+    },
+    {
+        id: 'us-rap',
+        img: usRap,
+        title: 'Top 100 US/UK Rap'
+    },
+    {
+        id: 'us-edm',
+        img: usEdm,
+        title: 'Top 100 US/UK EDM'
+    },
+    {
+        id: 'korea',
+        img: korea,
+        title: 'Top 100 Hàn Quốc'
+    },
+    {
+        id: 'china',
+        img: china,
+        title: 'Top 100 Hoa Ngữ'
+    }
+]
+
+const Songs = (props) => {
+    const { getSongDetail, loader, setLoader } = props
     const location = useLocation()
     const [songsData, setSongsData] = useState()
     const [allData, setAllData] = useState()
-    const [loader, setLoader] = useState(true)
     const typeParam = location.search.slice(1)
     const [filter, setFilter] = useState({
         _limit: 20,
@@ -22,11 +72,10 @@ const Songs = () => {
         const getData = async () => {
             const paramString = queryString.stringify(filter)
             const response = await getTypeSongs.getAll(`${typeParam}?${paramString}`)
-            console.log(response)
             setSongsData(response)
+            setLoader(false)
             activeButton()
             window.scrollTo(0, 0)
-            setLoader(false)
         }
         getData()
     }, [filter, typeParam])
@@ -47,20 +96,43 @@ const Songs = () => {
     const activeButton = () => {
         const btn = document.querySelectorAll('.btn-pagination')
         const num = filter._page - 1
-        console.log(num, btn)
         const btnActive = document.querySelector('.btn-pagination.active')
         if (btnActive) btnActive.classList.remove('active')
         btn[num]?.classList.add('active')
     }
 
+    const getDetail = (type, index, num) => {
+        let detail = {
+            type: type,
+            currentIndex: index,
+            pageNum: num
+        }
+        getSongDetail(detail)
+    }
+
     return (
         <div className='list-songs-page'>
-            <SearchForm />
             <div className="container">
+                {
+                    data.filter(item => item.id === location.search.slice(1)).map((item, index) => (
+                        <div className="left-side" key={index}>
+                            <h2>{item.title}</h2>
+                            <div className="img">
+                                <div className="title-img">
+                                    <img src={item.img} alt="" />
+                                </div>
+                            </div>
+                        </div>
+                    ))
+                }
                 <div className='box'>
                     {
                         songsData &&
-                        <ListSongs songsData={songsData} />
+                        <ListSongs
+                            songsData={songsData}
+                            getDetail={getDetail}
+                            pageNum={filter._page}
+                        />
                     }
                     {
                         allData &&

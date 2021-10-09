@@ -3,14 +3,65 @@
   position: sticky;
   top: 0;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   background: white;
-  box-shadow: 0 5px 5px 1px rgba(0, 0, 0, 0.1);
+  padding: 0 50px;
+  box-shadow: 0 0px 5px 1px rgba(0, 0, 0, 0.2);
   height: 80px;
-  border-radius: 0 0 30px 30px;
   z-index: 100;
 
+  .btn-bar {
+    font-size: 30px;
+    color: purple;
+    cursor: pointer;
+    display: none;
+  }
+  .btn-dark-mode {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    gap: 0 10px;
+    &.active {
+      svg {
+        color: white;
+      }
+      .button {
+        border: 3px solid white;
+        background: #615b5b;
+        &::before {
+          left: 20px;
+          background: white;
+        }
+      }
+    }
+    svg {
+      color: #615b5b;
+      font-size: 30px;
+      transition: 0.3s;
+    }
+    .button {
+      width: 40px;
+      height: 20px;
+      background: whitesmoke;
+      border-radius: 50px;
+      border: 3px solid #615b5b;
+      position: relative;
+      display: flex;
+      align-items: center;
+      transition: 0.3s;
+      &::before {
+        content: "";
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #615b5b;
+        left: 2px;
+        transition: 0.3s;
+      }
+    }
+  }
   .form {
     display: flex;
     justify-content: center;

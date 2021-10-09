@@ -36,7 +36,7 @@ const TopSongs = (props) => {
                                 </div>
                                 <div className="detail">
                                     <h5 className="song-name">{item.name}</h5>
-                                    <div className="singer">{item.creator}</div>
+                                    <div className="singer">{item.singer}</div>
                                 </div>
                             </div>
                         </Link>
