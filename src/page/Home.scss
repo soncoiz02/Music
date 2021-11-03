@@ -44,5 +44,38 @@
 
   .top-songs {
     width: 100%;
+    .list-songs {
+      .link {
+        .song {
+          width: 80%;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .home {
+    width: 100%;
+    .container {
+      padding: 30px;
+      .intro {
+        h1 {
+          font-size: 45px;
+          letter-spacing: 2px;
+        }
+
+        .dsc {
+          margin-left: 0;
+          margin-bottom: 20px;
+          font-size: 16px;
+        }
+
+        .lorem {
+          margin-left: 0;
+          font-size: 14px;
+        }
+      }
+    }
   }
 }

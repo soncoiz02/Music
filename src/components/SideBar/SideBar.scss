@@ -1,18 +1,28 @@
 @import url("https://fonts.googleapis.com/css2?family=Courgette&display=swap");
+
+.nav-cover {
+  width: 20%;
+  position: sticky;
+  z-index: 500;
+  height: 100vh;
+  top: 0;
+  left: 0;
+}
 .nav {
   top: 0;
   left: 0;
-  position: sticky;
+  position: relative;
   display: flex;
   flex-direction: column;
   padding: 30px;
   height: 100vh;
-  width: 20%;
-  background: whitesmoke;
+  width: 100%;
+  background: white;
+  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
   justify-content: center;
   animation: animate 10s infinite ease-in-out;
   flex-shrink: 0;
-  z-index: 101;
+  z-index: 505;
   &__link {
     display: flex;
     justify-content: center;
@@ -22,11 +32,12 @@
 
     .link {
       position: relative;
-      padding: 15px 20px 15px 10px;
       cursor: pointer;
       margin: 5px 0;
       transition: 0.3s;
       border-radius: 5px;
+      width: 100%;
+      display: flex;
       &.active {
         background: rgb(172, 27, 172);
         &:hover {
@@ -47,6 +58,7 @@
         width: 100%;
         font-size: 18px;
         color: rgb(172, 27, 172);
+        padding: 15px 20px 15px 10px;
         transition: 0.3s;
       }
     }
@@ -63,15 +75,19 @@
       &.active {
         height: 150px;
       }
-      a {
+      .sub-link {
         position: relative;
-        background: rgba(0, 0, 0, 0.1);
+        background: rgba(0, 0, 0, 0.05);
         padding: 10px 15px;
         color: rgb(172, 27, 172);
         border-radius: 5px;
         margin: 3px 0;
         &:hover {
-          background: rgba(128, 0, 128, 0.308);
+          background: rgba(128, 0, 128, 0.3);
+        }
+        &.active {
+          background: rgba(128, 0, 128, 0.5);
+          color: white;
         }
       }
     }
@@ -86,5 +102,36 @@
   }
   100% {
     background-position: 0% 50%;
+  }
+}
+
+@media (max-width: 767px) {
+  .nav-cover {
+    position: fixed;
+    width: 100%;
+    left: -100%;
+    &.active {
+      left: 0;
+    }
+    .nav {
+      position: fixed;
+      width: 60%;
+      left: -100%;
+      transition: 0.5s;
+
+      &.active {
+        left: 0;
+      }
+
+      &__link {
+        justify-content: flex-start;
+        padding-top: 50px;
+        .link {
+          a {
+            font-size: 16px;
+          }
+        }
+      }
+    }
   }
 }

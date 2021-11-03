@@ -3,7 +3,7 @@
   position: sticky;
   top: 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   background: white;
   padding: 0 50px;
@@ -17,51 +17,7 @@
     cursor: pointer;
     display: none;
   }
-  .btn-dark-mode {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    gap: 0 10px;
-    &.active {
-      svg {
-        color: white;
-      }
-      .button {
-        border: 3px solid white;
-        background: #615b5b;
-        &::before {
-          left: 20px;
-          background: white;
-        }
-      }
-    }
-    svg {
-      color: #615b5b;
-      font-size: 30px;
-      transition: 0.3s;
-    }
-    .button {
-      width: 40px;
-      height: 20px;
-      background: whitesmoke;
-      border-radius: 50px;
-      border: 3px solid #615b5b;
-      position: relative;
-      display: flex;
-      align-items: center;
-      transition: 0.3s;
-      &::before {
-        content: "";
-        position: absolute;
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        background: #615b5b;
-        left: 2px;
-        transition: 0.3s;
-      }
-    }
-  }
+
   .form {
     display: flex;
     justify-content: center;
@@ -102,6 +58,33 @@
       color: white;
       cursor: pointer;
       border: none;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .search-form {
+    height: 60px;
+    padding: 0 30px;
+    justify-content: space-between;
+    .form {
+      width: calc(100% - 60px);
+      height: calc(100% - 20px);
+
+      input {
+        padding: 5px 10px;
+        font-size: 14px;
+      }
+      .btn-search {
+        width: 32px;
+        height: 32px;
+        svg {
+          font-size: 16px;
+        }
+      }
+    }
+    .btn-bar {
+      display: flex;
     }
   }
 }

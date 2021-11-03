@@ -1,57 +1,58 @@
 import { faBars, faSearch, faMoon, faSun } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { useHistory } from 'react-router'
+import { setSearchValue } from '../../action/songs'
 import './SearchForm.scss'
 const SearchForm = () => {
-    const [searchValue, setSearchValue] = useState('')
+    const history = useHistory()
+
+    const dispatch = useDispatch()
+
+    const [value, setValue] = useState('')
     const [disable, setDisable] = useState(true)
     const [darkMode, setDarkMode] = useState(false)
-    const setValue = (e) => {
+    const getValue = (e) => {
         const value = e.target.value
-        setSearchValue(value)
+        setValue(value)
         setDisable(false)
     }
 
-    const getQueryValue = (e) => {
+    const getSearchValue = (e) => {
         e.preventDefault()
-        localStorage.setItem('search-name', searchValue)
-        window.location.assign(`/search?q=${searchValue}`)
+        dispatch(setSearchValue(value))
+        setValue('')
+        history.push('/search')
     }
 
-    const handleDarkMode = () => {
-        setDarkMode(!darkMode)
-        const container = document.querySelector('.container')
-        if (darkMode === false) {
-            container.classList.add('dark')
-        }
-        else {
-            container.classList.remove('dark')
-        }
+    const handleActive = () => {
+        const nav = document.querySelector('.nav')
+        const navCover = document.querySelector('.nav-cover')
+        nav.classList.add('active')
+        navCover.classList.add('active')
     }
+
     return (
         <div className="search-form">
-            <div className="btn-bar">
-                <FontAwesomeIcon icon={faBars} />
-            </div>
-            <form className="form" onSubmit={getQueryValue}>
+            <form className="form" onSubmit={getSearchValue}>
                 <input
                     type="text"
                     placeholder="Tìm tên bài hát hoặc ca sĩ..."
-                    value={searchValue}
-                    onChange={setValue}
+                    value={value}
+                    onChange={getValue}
                 />
                 <button
                     type="submit"
                     disabled={disable}
-                    onClick={getQueryValue}
+                    onClick={getSearchValue}
                     className="btn-search"
                 >
                     <FontAwesomeIcon icon={faSearch} />
                 </button>
             </form>
-            <div className={darkMode === true ? "btn-dark-mode active" : "btn-dark-mode"} onClick={handleDarkMode}>
-                <div className="button"></div>
-                <FontAwesomeIcon icon={darkMode === true ? faSun : faMoon} />
+            <div className="btn-bar" onTouchStart={handleActive}>
+                <FontAwesomeIcon icon={faBars} />
             </div>
         </div>
     )

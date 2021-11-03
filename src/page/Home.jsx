@@ -1,14 +1,23 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import getTypeSongs from '../api/typeSongsApi'
 import ListCate from '../components/ListCate/ListCate'
 import Loader from '../components/Loader/Loader'
 import TopSongs from '../components/TopSongs/TopSongs'
 import './Home.scss'
 const Home = () => {
-    // document.title = 'SMusic'
     const [loader, setLoader] = useState(true)
-    const removeLoader = () => {
-        setLoader(false)
-    }
+    useEffect(() => {
+        const getAllSongs = async () => {
+            try {
+                const data = await getTypeSongs.getAll('all-songs')
+                localStorage.setItem('all-songs', JSON.stringify(data))
+                setLoader(false)
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        getAllSongs()
+    }, [])
 
     return (
         <div className="home">
@@ -19,7 +28,7 @@ const Home = () => {
                     <p className='lorem'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, fugiat consequatur dolore sequi eos laborum quod voluptas voluptates molestiae aspernatur! Minus, sit expedita! Debitis expedita sequi est consequatur nulla error!</p>
                 </div>
                 <ListCate />
-                <TopSongs setLoader={removeLoader} />
+                <TopSongs />
             </div>
             {
                 loader === true &&

@@ -18,25 +18,12 @@
       align-items: center;
       position: sticky;
       top: 100px;
-      height: 250px;
+      height: auto;
       gap: 20px 0;
       h2 {
         font-size: 36px;
         color: #1a0080;
         font-weight: 800;
-      }
-      .img {
-        width: 320px;
-        height: 320px;
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        &.active {
-          .title-img::after {
-            background: rgba(0, 0, 0, 0.5);
-          }
-        }
       }
       .title-img {
         width: 320px;
@@ -44,14 +31,6 @@
         position: relative;
         border-radius: 10px;
         overflow: hidden;
-        &::after {
-          content: "";
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          background: none;
-          transition: 0.3s;
-        }
         img {
           width: 100%;
           height: 100%;
@@ -59,17 +38,34 @@
           position: absolute;
         }
       }
-      .song-img {
+      .playing-animation {
         position: absolute;
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
-        overflow: hidden;
-        box-shadow: 0 0 10px 1px rgba(255, 255, 255, 0.3);
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
+        display: none;
+        gap: 0 5px;
+        transform: translateY(-50%);
+        align-items: flex-end;
+        .play {
+          width: 8px;
+          height: 0;
+          background: white;
+          animation: updown 0.5s infinite linear alternate;
+          &:nth-child(2) {
+            animation-delay: 0.5s;
+          }
+          &:nth-child(3) {
+            animation-delay: 0.75s;
+          }
+          &:nth-child(4) {
+            animation-delay: 0.25s;
+          }
+        }
+        @keyframes updown {
+          0% {
+            height: 0px;
+          }
+          100% {
+            height: 40px;
+          }
         }
       }
     }
@@ -82,7 +78,33 @@
       flex-direction: column;
       align-items: center;
       gap: 50px 0;
-      background: white;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .list-songs-page {
+    .container {
+      flex-direction: column;
+      padding: 30px;
+      gap: 30px 0;
+      .left-side {
+        position: relative;
+        top: 0;
+        gap: 10px 0;
+        height: auto;
+
+        h2 {
+          font-size: 26px;
+        }
+        .title-img {
+          width: 250px;
+          height: 250px;
+        }
+      }
+      .box {
+        gap: 20px 0;
+      }
     }
   }
 }

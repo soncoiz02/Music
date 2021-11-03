@@ -20,6 +20,7 @@ li {
 }
 .container {
   display: flex;
+  background: whitesmoke;
 }
 .main {
   display: flex;
@@ -29,6 +30,9 @@ li {
 }
 body {
   font-family: "Nunito Sans", sans-serif;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .loader-bg {

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import './ProgressBar.scss'
 
 const ProgressBar = (props) => {
-    const { onChange, percent, value, currentTime, duration } = props
+    const { onChange, percent, currentTime, duration } = props
     const [position, setPosition] = useState(0)
     const [marginLeft, setMarginLeft] = useState(0)
     const [progressBarWidth, setProgressBarWidth] = useState(0)

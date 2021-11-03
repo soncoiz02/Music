@@ -29,7 +29,7 @@
   position: relative;
 }
 
-.link {
+.item {
   width: 100%;
   position: relative;
   display: flex;
@@ -104,6 +104,74 @@
     .singer {
       font-size: 16px;
       color: gray;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .top-songs {
+    padding: 20px 0 50px 0;
+
+    h2 {
+      font-size: 30px;
+      &::after {
+        width: 50%;
+        height: 3px;
+        bottom: -5px;
+      }
+    }
+
+    .list-songs {
+      gap: 15px 0;
+      .item {
+        gap: 0 10px;
+
+        .top {
+          font-size: 20px;
+          width: 35px;
+          height: 35px;
+        }
+
+        .song {
+          border: none;
+          padding: 0;
+          width: calc(100% - 35px);
+          &.active {
+            border-radius: 5px;
+          }
+          .main {
+            gap: 0 10px;
+
+            .song-img {
+              width: 65px;
+              height: 65px;
+            }
+
+            .detail {
+              .song-name {
+                font-size: 15px;
+              }
+              .singer {
+                font-size: 12px;
+              }
+            }
+          }
+
+          .play-btn {
+            left: 25px;
+            svg {
+              opacity: 0.5;
+            }
+          }
+
+          .rotate-animation {
+            svg {
+              font-size: 30px;
+              margin-right: 10px;
+            }
+          }
+        }
+      }
     }
   }
 }

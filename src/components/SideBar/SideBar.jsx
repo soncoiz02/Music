@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import { useLocation } from 'react-router'
 import './SideBar.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpotify } from '@fortawesome/free-brands-svg-icons'
-import { faHome, faMusic, faPodcast, faHeadphones } from '@fortawesome/free-solid-svg-icons'
+import { faHome, faMusic, faPodcast } from '@fortawesome/free-solid-svg-icons'
+import Songs from '../../page/Songs'
 
 const navData = [
     {
@@ -66,20 +68,20 @@ const navData = [
 const SubNav = props => {
     const { subNavData, onclick } = props
     return (
-        <Link to={subNavData.path} onClick={onclick}>
+        <Link to={subNavData.path} onClick={onclick} className="sub-link">
             {subNavData.text}
         </Link>
     )
 }
 
-const SideBar = (props) => {
-    const { setLoader } = props
+const SideBar = () => {
     useEffect(() => {
         activeLink()
     }, [])
     const activeLink = () => {
         const links = document.querySelectorAll('.link')
         const subNav = document.querySelectorAll('.sub-nav')
+        const subLink = document.querySelectorAll('.sub-link')
         links[0].classList.add('active')
         for (let i = 0; i < links.length; i++) {
             links[i].onclick = () => {
@@ -97,25 +99,51 @@ const SideBar = (props) => {
                 subNav[0].classList.remove('active')
             }
         }
+        subLink.forEach(e => {
+            e.onclick = () => {
+                const activeLink = document.querySelector('.sub-link.active')
+                if (activeLink) activeLink.classList.remove('active')
+                e.classList.add('active')
+            }
+        })
     }
+
+    const handleClick = () => {
+        const listSong = document.querySelectorAll('.song')
+        if (listSong) {
+            listSong.forEach(e => {
+                e.classList.remove('active')
+            })
+        }
+    }
+
+    const removeActive = () => {
+        const navActive = document.querySelector('.nav.active')
+        const navCoverActive = document.querySelector('.nav-cover.active')
+        navActive.classList.remove('active')
+        navCoverActive.classList.remove('active')
+    }
+
     return (
-        <div className="nav">
-            <ul className="nav__link">
-                {navData.map((data, index) => (
-                    <>
-                        <li className='link'>
-                            {
-                                data.path ?
-                                    <NavLink to={data.path}>{data.icon} {data.text}</NavLink>
-                                    : <a href="#">{data.icon} {data.text}</a>
-                            }
-                        </li>
-                        <div className="sub-nav">
-                            {data?.subNav?.map((data, index) => (<SubNav subNavData={data} key={index} onclick={setLoader} />))}
-                        </div>
-                    </>
-                ))}
-            </ul>
+        <div className="nav-cover" onTouchStart={removeActive}>
+            <div className="nav">
+                <ul className="nav__link">
+                    {navData.map((data, index) => (
+                        <>
+                            <li className='link'>
+                                {
+                                    data.path ?
+                                        <NavLink to={data.path}>{data.icon} {data.text}</NavLink>
+                                        : <a href="#">{data.icon} {data.text}</a>
+                                }
+                            </li>
+                            <div className="sub-nav">
+                                {data?.subNav?.map((data, index) => (<SubNav subNavData={data} key={index} onclick={handleClick} />))}
+                            </div>
+                        </>
+                    ))}
+                </ul>
+            </div>
         </div >
     )
 }

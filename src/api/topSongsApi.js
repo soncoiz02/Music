@@ -1,7 +1,7 @@
 import axiosClient from './axiosClient'
 
 const getTopSong = {
-    getAll: () => {
+    getTopSongs: () => {
         const url = '/Top10'
         return axiosClient.get(url)
     }

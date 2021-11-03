@@ -1,51 +1,73 @@
-import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router'
-import getSearchResult from '../api/searchResultApi'
+import React, { useEffect } from 'react'
 import notFound from '../assets/img/not-found.jpg'
 import './Search.scss'
-import { Link } from 'react-router-dom'
-import Loader from '../components/Loader/Loader'
-import SearchForm from '../components/SearchForm/SearchForm'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCompactDisc, faPlay } from '@fortawesome/free-solid-svg-icons'
+import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { setActiveName, setDetail, setSearchValue, setSongs } from '../action/songs'
 
 const Search = () => {
-    const location = useLocation()
-    const [searchResult, setSearchResult] = useState([])
-    const [loader, setLoader] = useState(true)
-    const searchQuery = location.search
+    const searchValue = useSelector(state => state.songs.searchValue)
+    const listSongs = useSelector(state => state.songs.list)
+    const activeSongName = useSelector(state => state.songs.activeName)
+    const dispatch = useDispatch()
+    const allSongs = JSON.parse(localStorage.getItem('all-songs'))
 
     useEffect(() => {
-        const getSearchResults = async () => {
-            try {
-                const response = await getSearchResult.get(searchQuery)
-                console.log(response)
-                setSearchResult(response)
-                setLoader(false)
-            } catch (error) {
-                console.log('Fail to get search result, error: ', error)
+        filterSongs()
+    }, [searchValue])
+
+    const filterSongs = () => {
+        try {
+            if (searchValue !== '') {
+                const filterSongs = allSongs.filter(e => {
+                    return e.name.toLowerCase().includes(searchValue.toLowerCase()) || e.singer.toLowerCase().includes(searchValue.toLowerCase())
+                })
+                console.log(filterSongs);
+                dispatch(setSongs(filterSongs))
             }
+            else {
+                setSearchValue('')
+            }
+        } catch (error) {
+            console.log(error);
         }
-        getSearchResults()
-    }, [searchQuery])
+    }
+
+    const handleDetailSongData = (currentIndex) => {
+        const detailSong = listSongs[currentIndex]
+        dispatch(setDetail(detailSong))
+        dispatch(setActiveName(detailSong.name))
+    }
 
     return (
         <div className="search-page">
             <div className="container">
                 {
-                    searchResult.length > 0 ?
+                    listSongs?.length > 0 && searchValue !== '' ?
                         <div className="box">
-                            <h2>Result for <span>"{localStorage.getItem('search-name')}"</span> </h2>
+                            <h2>Result for <span>"{searchValue}"</span> </h2>
                             <div className="list-result">
                                 {
-                                    searchResult.map((item, index) => (
-                                        <Link className="song" key={index} to={`/player?name=${item.name}`}>
-                                            <div className="img">
-                                                <img src={item.avatar} alt="" />
+                                    listSongs.map((item, index) => (
+                                        <div className={item.name === activeSongName ? 'song active' : 'song'} onClick={() => handleDetailSongData(index)} >
+                                            <div className="main">
+                                                <div className="song-img">
+                                                    <img src={item.avatar} alt="" />
+                                                </div>
+                                                <div className="detail">
+                                                    <h5 className="song-name">{item.name}</h5>
+                                                    <p className="singer">{item.singer}</p>
+                                                </div>
                                             </div>
-                                            <div className="detail">
-                                                <h5 className="name">{item.name}</h5>
-                                                <p className="singer">{item.creator}</p>
+                                            <div className="play-btn">
+                                                <FontAwesomeIcon icon={faPlay} />
                                             </div>
-                                        </Link>
+                                            <div className="rotate-animation">
+                                                <FontAwesomeIcon icon={faCompactDisc} />
+                                            </div>
+                                        </div>
                                     ))
 
                                 }
@@ -53,17 +75,13 @@ const Search = () => {
                         </div>
                         :
                         <div className="box">
-                            <h2>No result for <span>"{localStorage.getItem('search-name')}"</span> </h2>
+                            <h2>No result for <span>"{searchValue}"</span> </h2>
                             <div className="not-found">
                                 <img src={notFound} alt="" />
                             </div>
                         </div>
                 }
             </div>
-            {
-                loader === true &&
-                < Loader />
-            }
         </div >
     )
 }

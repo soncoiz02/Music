@@ -3,19 +3,38 @@
   flex-direction: column;
   position: relative;
   width: 100%;
-  gap: 0;
+  gap: 5px 0;
+
+  $img-size: 80px;
+  .loading {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    .loading-img {
+      width: $img-size;
+      height: $img-size;
+      border-radius: 10px;
+      background: gray;
+    }
+  }
 
   .song {
     position: relative;
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    $img-size: 80px;
+    width: 100%;
     transition: 0.3s;
     padding: 10px;
     &:hover {
       border-radius: 5px;
       background: #ed8efa1f;
+      .main {
+        .song-img::after {
+          background: rgba(0, 0, 0, 0.4);
+        }
+      }
       .play-btn {
         svg {
           opacity: 1;
@@ -23,7 +42,8 @@
       }
     }
     &.active {
-      background: #ed8efa1f;
+      background: #ed8efa4a;
+      border-radius: 10px;
       .play-btn {
         svg {
           display: none;
@@ -31,6 +51,9 @@
         .playing-animation {
           display: flex;
         }
+      }
+      .rotate-animation {
+        display: flex;
       }
     }
     .main {
@@ -44,7 +67,10 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100%;
+      position: absolute;
+      left: 40px;
+      top: 50%;
+      transform: translateY(-50%);
       svg {
         font-size: 30px;
         color: rgb(225, 154, 240);
@@ -52,48 +78,32 @@
         transition: 0.5s;
         cursor: pointer;
       }
-      .playing-animation {
-        gap: 0 3px;
-        display: none;
-        .play {
-          width: 5px;
-          height: 0px;
-          background: rgb(225, 154, 240);
-          animation: playing 0.4s linear infinite alternate;
-          align-self: flex-end;
-          &:nth-child(1) {
-            animation-delay: 0.25s;
-          }
-          &:nth-child(2) {
-            animation-delay: 0.5s;
-          }
-          &:nth-child(3) {
-            animation-delay: 0.75s;
-          }
-          &:nth-child(4) {
-            animation-delay: 0.5s;
-          }
-          &:nth-child(5) {
-            animation-delay: 0.25s;
-          }
-        }
-      }
-      @keyframes playing {
-        0% {
-          height: 0px;
-        }
-        50%,
-        100% {
-          height: 20px;
-        }
+    }
+
+    .rotate-animation {
+      display: flex;
+      align-items: center;
+      display: none;
+      svg {
+        font-size: 40px;
+        color: rgb(108, 61, 117);
+        animation: rotate 1s infinite linear;
       }
     }
+
     &-img {
       width: $img-size;
       height: $img-size;
       position: relative;
       border-radius: 10px;
       overflow: hidden;
+      &::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        transition: 0.3s;
+      }
       img {
         width: 100%;
         height: 100%;
@@ -106,13 +116,58 @@
       flex-direction: column;
       gap: 0;
       width: calc(100% - (#{$img-size} + 20px));
-      .name {
+      .song-name {
         font-size: 20px;
         color: #1a0080;
       }
       .singer {
         font-size: 16px;
         color: gray;
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .list-songs {
+    gap: 10px 0;
+    .song {
+      border: none;
+      padding: 0;
+      width: 100%;
+      &.active {
+        border-radius: 5px;
+      }
+      .main {
+        gap: 0 10px;
+
+        .song-img {
+          width: 65px;
+          height: 65px;
+        }
+
+        .detail {
+          .song-name {
+            font-size: 16px;
+          }
+          .singer {
+            font-size: 12px;
+          }
+        }
+      }
+
+      .play-btn {
+        left: 25px;
+        svg {
+          opacity: 0.5;
+        }
+      }
+
+      .rotate-animation {
+        svg {
+          font-size: 30px;
+          margin-right: 10px;
+        }
       }
     }
   }

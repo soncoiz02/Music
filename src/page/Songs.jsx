@@ -14,6 +14,9 @@ import usRap from '../assets/img/rap-us.jpg'
 import usEdm from '../assets/img/edm-us.jpg'
 import korea from '../assets/img/korea.jpg'
 import china from '../assets/img/china.jpg'
+import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { setSongs } from '../action/songs'
 
 const data = [
     {
@@ -58,21 +61,25 @@ const data = [
     }
 ]
 
-const Songs = (props) => {
-    const { getSongDetail, loader, setLoader } = props
+const Songs = () => {
     const location = useLocation()
-    const [songsData, setSongsData] = useState()
+    const listSongs = useSelector(state => state.songs.list)
+    const dispatch = useDispatch()
+
     const [allData, setAllData] = useState()
+    const [loader, setLoader] = useState(true)
+
     const typeParam = location.search.slice(1)
     const [filter, setFilter] = useState({
         _limit: 20,
         _page: 1
     })
+
     useEffect(() => {
         const getData = async () => {
             const paramString = queryString.stringify(filter)
             const response = await getTypeSongs.getAll(`${typeParam}?${paramString}`)
-            setSongsData(response)
+            dispatch(setSongs(response))
             setLoader(false)
             activeButton()
             window.scrollTo(0, 0)
@@ -101,15 +108,6 @@ const Songs = (props) => {
         btn[num]?.classList.add('active')
     }
 
-    const getDetail = (type, index, num) => {
-        let detail = {
-            type: type,
-            currentIndex: index,
-            pageNum: num
-        }
-        getSongDetail(detail)
-    }
-
     return (
         <div className='list-songs-page'>
             <div className="container">
@@ -117,21 +115,19 @@ const Songs = (props) => {
                     data.filter(item => item.id === location.search.slice(1)).map((item, index) => (
                         <div className="left-side" key={index}>
                             <h2>{item.title}</h2>
-                            <div className="img">
-                                <div className="title-img">
-                                    <img src={item.img} alt="" />
-                                </div>
+                            <div className="title-img">
+                                <img src={item.img} alt="" />
                             </div>
                         </div>
                     ))
                 }
                 <div className='box'>
                     {
-                        songsData &&
+                        listSongs &&
                         <ListSongs
-                            songsData={songsData}
-                            getDetail={getDetail}
+                            songsData={listSongs}
                             pageNum={filter._page}
+                            dispatch={dispatch}
                         />
                     }
                     {
