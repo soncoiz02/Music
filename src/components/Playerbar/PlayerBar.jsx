@@ -3,7 +3,7 @@ import './PlayerBar.scss'
 import ProgressBar from '../Progress/ProgressBar'
 import Control from '../Control/Control'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faChevronCircleUp, faMusic } from '@fortawesome/free-solid-svg-icons'
+import { faMusic } from '@fortawesome/free-solid-svg-icons'
 import { useSelector, useDispatch } from 'react-redux'
 import { setActiveName, setDetail, setIsPlay } from '../../action/songs'
 const PlayerBar = () => {

@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react'
 import { Link, NavLink } from 'react-router-dom'
-import { useLocation } from 'react-router'
 import './SideBar.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpotify } from '@fortawesome/free-brands-svg-icons'
 import { faHome, faMusic, faPodcast } from '@fortawesome/free-solid-svg-icons'
-import Songs from '../../page/Songs'
 
 const navData = [
     {

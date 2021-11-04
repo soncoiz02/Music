@@ -1,4 +1,4 @@
-import { faBars, faSearch, faMoon, faSun } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faSearch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
@@ -12,7 +12,6 @@ const SearchForm = () => {
 
     const [value, setValue] = useState('')
     const [disable, setDisable] = useState(true)
-    const [darkMode, setDarkMode] = useState(false)
     const getValue = (e) => {
         const value = e.target.value
         setValue(value)
