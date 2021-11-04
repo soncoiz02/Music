@@ -27,12 +27,12 @@ const data = [
     {
         id: 'vn-rap',
         img: vnRap,
-        title: 'Top 100 Rap Việt'
+        title: 'Top 100 Vietnamese Rap'
     },
     {
         id: 'vn-edm',
         img: vnEdm,
-        title: 'Top 100 EDM Việt'
+        title: 'Top 100 Vietnamese EDM'
     },
     {
         id: 'us-pop',
@@ -52,12 +52,12 @@ const data = [
     {
         id: 'korea',
         img: korea,
-        title: 'Top 100 Hàn Quốc'
+        title: 'Top 100 Korean'
     },
     {
         id: 'china',
         img: china,
-        title: 'Top 100 Hoa Ngữ'
+        title: 'Top 100 Chinese'
     }
 ]
 

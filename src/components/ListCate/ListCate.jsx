@@ -11,7 +11,7 @@ import china from '../../assets/img/china.jpg'
 import './ListCate.scss'
 const cateData = [
     {
-        title: "Top 100 Việt Nam",
+        title: "Top 100 Vietnam",
         list: [
             {
                 name: "Top 100 V-POP",
@@ -19,19 +19,19 @@ const cateData = [
                 path: '/list-songs?vn-pop',
             },
             {
-                name: "Top 100 Rap Việt",
+                name: "Top 100 Vietnamese Rap",
                 img: vnRap,
                 path: '/list-songs?vn-rap',
             },
             {
-                name: "Top 100 EDM Việt",
+                name: "Top 100 Vietnamese EDM",
                 img: vnEdm,
                 path: '/list-songs?vn-remix',
             }
         ]
     },
     {
-        title: "Top 100 Âu Mỹ",
+        title: "Top 100 US/UK",
         list: [
             {
                 name: "Top 100 US/UK-POP",
@@ -51,15 +51,15 @@ const cateData = [
         ]
     },
     {
-        title: "Top 100 Châu Á",
+        title: "Top 100 Asian",
         list: [
             {
-                name: "Top 100 Hàn Quốc",
+                name: "Top 100 Korean",
                 img: korea,
                 path: '/list-songs?korea',
             },
             {
-                name: "Top 100 Hoa Ngữ",
+                name: "Top 100 Chinese",
                 img: china,
                 path: '/list-songs?china',
             }
